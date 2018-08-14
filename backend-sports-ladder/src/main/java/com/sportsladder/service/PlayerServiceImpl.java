@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
@@ -70,12 +71,27 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public List<Player> updateRankOffset(Player player, List<Player> players) {
-        players.stream().filter(listPlayer -> player.getId() == listPlayer.getId()).forEach(player1 -> player1.setRank(player.getRank()));
-        players.stream().filter(listPlayer -> (listPlayer.getRank() != null &&
-                listPlayer.getRank() >= player.getRank() &&
-                listPlayer.getId() != player.getId())).
-                forEach(listPlayer -> listPlayer.setRank(listPlayer.getRank() + 1));
+    public List<Player> updateRankOffset(Player updatedPlayer, List<Player> players) {
+
+        Optional<Player> currentPlayer = players.stream().filter(
+                listPlayer -> updatedPlayer.getId() == listPlayer.getId()).findFirst();
+
+        Integer currentRank = currentPlayer.get().getRank();
+
+        currentPlayer.get().setRank(updatedPlayer.getRank());
+        currentPlayer.get().setName(updatedPlayer.getName());
+
+        if (currentRank - updatedPlayer.getRank() > 0) {
+            players.stream().filter(listPlayer -> (listPlayer.getRank() != null &&
+                    listPlayer.getRank() >= updatedPlayer.getRank() && listPlayer.getRank() <= currentRank &&
+                    listPlayer.getId() != updatedPlayer.getId())).
+                    forEach(listPlayer -> listPlayer.setRank(listPlayer.getRank() + 1));
+        } else {
+            players.stream().filter(listPlayer -> (listPlayer.getRank() != null &&
+                    listPlayer.getRank() <= updatedPlayer.getRank() && listPlayer.getRank() >= currentRank &&
+                    listPlayer.getId() != updatedPlayer.getId())).
+                    forEach(listPlayer -> listPlayer.setRank(listPlayer.getRank() - 1));
+        }
         return players;
     }
 

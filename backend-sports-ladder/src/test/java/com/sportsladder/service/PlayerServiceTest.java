@@ -60,8 +60,20 @@ public class PlayerServiceTest {
         player4.setRank(4);
 
         Player player5 = new Player();
-        player5.setName("Tong Luo");
-        player5.setRank(null);
+        player5.setName("Duane");
+        player5.setRank(5);
+
+        Player player6 = new Player();
+        player6.setName("Walking Dog");
+        player6.setRank(6);
+
+        Player player7 = new Player();
+        player7.setName("MonStars");
+        player7.setRank(7);
+
+        Player player8 = new Player();
+        player8.setName("Tong Luo");
+        player8.setRank(null);
 
 
         localPlayers.add(player1);
@@ -69,6 +81,9 @@ public class PlayerServiceTest {
         localPlayers.add(player3);
         localPlayers.add(player4);
         localPlayers.add(player5);
+        localPlayers.add(player6);
+        localPlayers.add(player7);
+        localPlayers.add(player8);
         return  localPlayers;
     }
 
@@ -205,6 +220,24 @@ public class PlayerServiceTest {
         expectedPlayers.get(1).setRank(3);
         expectedPlayers.get(2).setRank(4);
         expectedPlayers.get(3).setRank(2);
+        Collections.sort(expectedPlayers);
+        Collections.sort(newPlayers);
+        Assert.assertEquals(expectedPlayers, newPlayers);
+
+    }
+
+    @Test
+    public void updateRankOffsetGoingDown() {
+        Player player = new Player();
+        player.setId(2l);
+        player.setName("Felipe Leite");
+        player.setRank(5);
+        List<Player> newPlayers = playerService.updateRankOffset(player, getPlayersWithIds());
+        List<Player> expectedPlayers = getPlayersWithIds();
+        expectedPlayers.get(1).setRank(5);
+        expectedPlayers.get(2).setRank(2);
+        expectedPlayers.get(3).setRank(3);
+        expectedPlayers.get(4).setRank(4);
         Collections.sort(expectedPlayers);
         Collections.sort(newPlayers);
         Assert.assertEquals(expectedPlayers, newPlayers);
