@@ -1,8 +1,5 @@
 package com.sportsladder.config;
 
-import com.sportsladder.dataaccess.BookRepository;
-import com.sportsladder.dataaccess.PlayerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +13,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.util.Collections;
 
 /**
  * Created by Felipe Leite on 7/1/2017.

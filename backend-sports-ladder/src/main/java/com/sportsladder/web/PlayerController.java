@@ -3,6 +3,7 @@ package com.sportsladder.web;
 import com.sportsladder.domain.Player;
 import com.sportsladder.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,8 @@ import java.util.List;
 /**
  * Created by Felipe Leite on 7/1/2017.
  */
-@RestController
+//@RestController
+    @Controller
 @RequestMapping("/player")
 public class PlayerController {
 
@@ -22,7 +24,7 @@ public class PlayerController {
     private PlayerService playerService;
 
     @RequestMapping(value = "/mockdata/")
-    private List<Player> setup() {
+    public String setup(ModelMap modelMap) {
         Player player1 = new Player();
         player1.setName("Chris Diehl");
         player1.setRank(1);
@@ -50,17 +52,18 @@ public class PlayerController {
         players.add(player4);
         players.add(player5);
         playerService.saveAllPlayers(players);
-
-        return players;
+        modelMap.put("players", players);
+        return "players";
 
     }
 
 
 
     @RequestMapping(value = "/")
-    public List<Player> getPlayers() {
+    public String getPlayers(ModelMap modelMap) {
         List<Player> players = playerService.getAllPlayers();
-        return playerService.sortPlayersByRankAscending(players);
+        modelMap.put("players",  playerService.sortPlayersByRankAscending(players));
+        return "players";
     }
 
     @RequestMapping(value = "/add/{name}/")

@@ -66,7 +66,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public List<Player> saveAllPlayers(List<Player> players) {
-        playerRepository.save(players);
+        playerRepository.saveAll(players);
         return players;
     }
 
@@ -97,7 +97,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public boolean deletePlayer(Long playerId) {
-        playerRepository.delete(playerId);
+        playerRepository.deleteById(playerId);
         return true;
     }
 

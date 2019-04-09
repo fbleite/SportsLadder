@@ -104,6 +104,9 @@ public class PlayerServiceTest {
 
     @Test
     public void sortPlayersByRankAscendingTest() {
+        playerService.savePlayer(players.get(7));
+        playerService.savePlayer(players.get(6));
+        playerService.savePlayer(players.get(5));
         playerService.savePlayer(players.get(4));
         playerService.savePlayer(players.get(3));
         playerService.savePlayer(players.get(2));
@@ -137,7 +140,7 @@ public class PlayerServiceTest {
     @Test
     public void swapPlayersRankOneNullRank() throws Exception {
         try {
-            List<Player> swappedPlayers = playerService.swapPlayersRank(players.get(1), players.get(4));
+            List<Player> swappedPlayers = playerService.swapPlayersRank(players.get(1), players.get(7));
             fail("Expected null pointer exception");
         } catch (NullPointerException e) {
             //Expected behaviour
@@ -198,7 +201,7 @@ public class PlayerServiceTest {
     @Test
     public void getUnrankedPlayers() throws Exception {
         playerService.saveAllPlayers(players);
-        Assert.assertEquals(players.get(4), playerService.getUnrankedPlayers().get(0));
+        Assert.assertEquals(players.get(7), playerService.getUnrankedPlayers().get(0));
     }
 
     @Test
