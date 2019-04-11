@@ -1,10 +1,28 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Ping Pong Ladder</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<p>Get your greeting <a href="/greeting">here</a></p>
+<h1>Office Ping Pong Ladder</h1>
+<h3>Ranked Players</h3>
+<table id="rank">
+    <thead>
+    <td>Name</td>
+    <td>Rank</td>
+    </thead>
+</table>
+<h3>Unranked Players</h3>
+<table id="unrank">
+    <thead>
+    <td>Name</td>
+    </thead>
+</table>
+<input style="display: none;" class="showToSavePlayer" type="text" id="newPlayerName" name="fname">
+<button class="hideToSavePlayer" type="button" onclick="addPlayerTextBox()">Add new player</button>
+<button style="display: none;" class="showToSavePlayer" type="button" onclick="saveNewPlayer()">Save new player</button>
+
 </body>
 </html>
+<script src="script.js"></script>
