@@ -15,8 +15,8 @@ import java.util.List;
 /**
  * Created by Felipe Leite on 7/1/2017.
  */
-//@RestController
-    @Controller
+@RestController
+//    @Controller
 @RequestMapping("/player")
 public class PlayerController {
 
@@ -24,46 +24,44 @@ public class PlayerController {
     private PlayerService playerService;
 
     @RequestMapping(value = "/mockdata/")
-    public String setup(ModelMap modelMap) {
+    public List<Player> setup() {
         Player player1 = new Player();
-        player1.setName("Chris Diehl");
+        player1.setName("Duane Johnson");
         player1.setRank(1);
 
         Player player2 = new Player();
-        player2.setName("Felipe Leite");
+        player2.setName("Sam Sung");
         player2.setRank(2);
 
         Player player3 = new Player();
-        player3.setName("Michael Valdes");
+        player3.setName("Ball Smasher");
         player3.setRank(3);
 
         Player player4 = new Player();
-        player4.setName("Jide Laoye");
+        player4.setName("Paddle Breaker");
         player4.setRank(4);
 
         Player player5 = new Player();
-        player5.setName("Tong Luo");
+        player5.setName("ACE getter");
         player5.setRank(null);
 
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         players.add(player1);
         players.add(player2);
         players.add(player3);
         players.add(player4);
         players.add(player5);
         playerService.saveAllPlayers(players);
-        modelMap.put("players", players);
-        return "players";
+        return players;
 
     }
 
 
 
     @RequestMapping(value = "/")
-    public String getPlayers(ModelMap modelMap) {
+    public List<Player> getPlayers() {
         List<Player> players = playerService.getAllPlayers();
-        modelMap.put("players",  playerService.sortPlayersByRankAscending(players));
-        return "players";
+        return players;
     }
 
     @RequestMapping(value = "/add/{name}/")
