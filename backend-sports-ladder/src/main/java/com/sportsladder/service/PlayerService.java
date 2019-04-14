@@ -47,4 +47,6 @@ public interface PlayerService {
     public List<Player> getUnrankedPlayers ();
 
     public List<Player> adjustRankGaps (List<Player> players);
+
+    public List<Player> mockPlayers();
 }

@@ -5,6 +5,7 @@ import com.sportsladder.domain.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -76,21 +77,23 @@ public class PlayerServiceImpl implements PlayerService {
         Optional<Player> currentPlayer = players.stream().filter(
                 listPlayer -> updatedPlayer.getId() == listPlayer.getId()).findFirst();
 
-        Integer currentRank = currentPlayer.get().getRank();
+        if (currentPlayer.isPresent()) {
+            Integer currentRank = currentPlayer.get().getRank();
 
-        currentPlayer.get().setRank(updatedPlayer.getRank());
-        currentPlayer.get().setName(updatedPlayer.getName());
+            currentPlayer.get().setRank(updatedPlayer.getRank());
+            currentPlayer.get().setName(updatedPlayer.getName());
 
-        if (currentRank - updatedPlayer.getRank() > 0) {
-            players.stream().filter(listPlayer -> (listPlayer.getRank() != null &&
-                    listPlayer.getRank() >= updatedPlayer.getRank() && listPlayer.getRank() <= currentRank &&
-                    listPlayer.getId() != updatedPlayer.getId())).
-                    forEach(listPlayer -> listPlayer.setRank(listPlayer.getRank() + 1));
-        } else {
-            players.stream().filter(listPlayer -> (listPlayer.getRank() != null &&
-                    listPlayer.getRank() <= updatedPlayer.getRank() && listPlayer.getRank() >= currentRank &&
-                    listPlayer.getId() != updatedPlayer.getId())).
-                    forEach(listPlayer -> listPlayer.setRank(listPlayer.getRank() - 1));
+            if (currentRank - updatedPlayer.getRank() > 0) {
+                players.stream().filter(listPlayer -> (listPlayer.getRank() != null &&
+                        listPlayer.getRank() >= updatedPlayer.getRank() && listPlayer.getRank() <= currentRank &&
+                        listPlayer.getId() != updatedPlayer.getId())).
+                        forEach(listPlayer -> listPlayer.setRank(listPlayer.getRank() + 1));
+            } else {
+                players.stream().filter(listPlayer -> (listPlayer.getRank() != null &&
+                        listPlayer.getRank() <= updatedPlayer.getRank() && listPlayer.getRank() >= currentRank &&
+                        listPlayer.getId() != updatedPlayer.getId())).
+                        forEach(listPlayer -> listPlayer.setRank(listPlayer.getRank() - 1));
+            }
         }
         return players;
     }
@@ -113,6 +116,39 @@ public class PlayerServiceImpl implements PlayerService {
         adjustedPlayers.addAll(players);
         players.stream().filter(predicate).forEach(player -> player.setRank(player.getRank() - 1));
         return adjustedPlayers;
+    }
+
+    @PostConstruct
+    @Override
+    public List<Player> mockPlayers() {
+        Player player1 = new Player();
+        player1.setName("Duane Johnson");
+        player1.setRank(1);
+
+        Player player2 = new Player();
+        player2.setName("Sam Sung");
+        player2.setRank(2);
+
+        Player player3 = new Player();
+        player3.setName("Ball Smasher");
+        player3.setRank(3);
+
+        Player player4 = new Player();
+        player4.setName("Paddle Breaker");
+        player4.setRank(4);
+
+        Player player5 = new Player();
+        player5.setName("ACE getter");
+        player5.setRank(null);
+
+        List<Player> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        players.add(player4);
+        players.add(player5);
+        this.saveAllPlayers(players);
+        return  players;
     }
 
     /**

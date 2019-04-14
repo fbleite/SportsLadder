@@ -2,7 +2,6 @@ package com.sportsladder.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Comparator;
 
 /**
  * Created by Felipe Leite on 7/1/2017.

@@ -3,13 +3,10 @@ package com.sportsladder.web;
 import com.sportsladder.domain.Player;
 import com.sportsladder.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,43 +22,13 @@ public class PlayerController {
 
     @RequestMapping(value = "/mockdata/")
     public List<Player> setup() {
-        Player player1 = new Player();
-        player1.setName("Duane Johnson");
-        player1.setRank(1);
-
-        Player player2 = new Player();
-        player2.setName("Sam Sung");
-        player2.setRank(2);
-
-        Player player3 = new Player();
-        player3.setName("Ball Smasher");
-        player3.setRank(3);
-
-        Player player4 = new Player();
-        player4.setName("Paddle Breaker");
-        player4.setRank(4);
-
-        Player player5 = new Player();
-        player5.setName("ACE getter");
-        player5.setRank(null);
-
-        List<Player> players = new ArrayList<>();
-        players.add(player1);
-        players.add(player2);
-        players.add(player3);
-        players.add(player4);
-        players.add(player5);
-        playerService.saveAllPlayers(players);
-        return players;
-
+        return playerService.mockPlayers();
     }
-
 
 
     @RequestMapping(value = "/")
     public List<Player> getPlayers() {
-        List<Player> players = playerService.getAllPlayers();
-        return players;
+        return playerService.getAllPlayers();
     }
 
     @RequestMapping(value = "/add/{name}/")
