@@ -1,28 +1,37 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <title>Ping Pong Ladder</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-<h1>Office Ping Pong Ladder</h1>
-<h3>Ranked Players</h3>
-<table id="rank">
-    <thead>
-    <td>Name</td>
-    <td>Rank</td>
-    </thead>
-</table>
-<h3>Unranked Players</h3>
-<table id="unrank">
-    <thead>
-    <td>Name</td>
-    </thead>
-</table>
-<input style="display: none;" class="showToSavePlayer" type="text" id="newPlayerName" name="fname">
-<button class="hideToSavePlayer" type="button" onclick="addPlayerTextBox()">Add new player</button>
-<button style="display: none;" class="showToSavePlayer" type="button" onclick="saveNewPlayer()">Save new player</button>
 
+<body>
+    <header>
+        <img src='logo2.png'>
+        <h1>Office Ping Pong Ladder</h1>
+        <a href='#'>Who's the best?</a>
+    </header>
+    <main>
+        <h2>Ranked Players</h2>
+        <table id="rank">
+            <thead>
+                <td>Name</td>
+                <td>Rank</td>
+            </thead>
+        </table>
+        <h2>Unranked Players</h2>
+        <table id="unrank">
+            <thead>
+                <td>Name</td>
+            </thead>
+        </table>
+        <input style="display: none;" class="showToSavePlayer" type="text" id="newPlayerName" name="fname">
+        <button class="hideToSavePlayer" type="button" onclick="addPlayerTextBox()">Add new player</button>
+        <button style="display: none;" class="showToSavePlayer" type="button" onclick="saveNewPlayer()">Save new player</button>
+    </main>
 </body>
+
 </html>
 <script src="script.js"></script>

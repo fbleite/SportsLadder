@@ -1,6 +1,6 @@
 function init() {
     getPlayers();
-};
+}
 
 
 
@@ -17,17 +17,16 @@ function getPlayers() {
 
 
 function addPlayersToTables(players) {
-    for (player in players) {
-        if (isPlayerRanked(players)) {
+    for (let player in players) {
+        if (isPlayerRanked(players[player])) {
             addToRankedTable(players[player].name, players[player].rank);
         }
         else {
             addToUnrankedTable(players[player].name);
         }
     }
-
-    function isPlayerRanked(players) {
-        return players[player].rank != null;
+    function isPlayerRanked(player) {
+        return player.rank != null;
     }
 }
 
